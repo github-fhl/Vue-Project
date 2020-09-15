@@ -6,6 +6,7 @@ import Hello from '@/views/home/hello'
 import hszj from '@/views/home/hszj'
 import tx from '@/views/home/tx'
 import mfSelect from '@/views/home/mfSelect'
+import sortTable from '@/views/VueSzBook/sortTable'
 //mfSelect
 import Vue from "vue";
 
@@ -22,6 +23,10 @@ router = new VueRouter({
 		props() {
 			return {name:"123"}
 		}
+	},
+	{
+		path: '/sortTable',
+		component: sortTable
 	},
 	{
 		path: '/mfSelect',
