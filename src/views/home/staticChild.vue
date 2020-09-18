@@ -1,5 +1,6 @@
 <template>
   <div id="example">
+      <p>staticChild</p>
     <p>{{ $t("language.name") }}</p>
     <p>{{ $t("navbar.home") }}</p>
     <!-- <child-dom
@@ -24,7 +25,7 @@
     <f-input :name="name" @input="(val) => (name = val)"></f-input>
     <div>{{ name }}</div>
     <my-component :data="data"></my-component>
-    <router-view></router-view>
+    <p>{{code}}</p>
   </div>
 </template>
 
@@ -33,6 +34,7 @@ import Vue from 'vue'
 import childDom from "./ChildDom.vue";
 import demoA from "./renderFun/demoA";
 export default {
+    props:["code"],
   data() {
     return {
       foo: "Hello, world",

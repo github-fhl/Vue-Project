@@ -7,6 +7,7 @@ import hszj from '@/views/home/hszj'
 import tx from '@/views/home/tx'
 import mfSelect from '@/views/home/mfSelect'
 import sortTable from '@/views/VueSzBook/sortTable'
+import staticChild from '@/views/home/staticChild'
 //mfSelect
 import Vue from "vue";
 
@@ -22,7 +23,23 @@ router = new VueRouter({
 		component: Hello,
 		props() {
 			return {name:"123"}
-		}
+		},
+		children:[{
+			path:`:staticChild`,
+			component: {template: "<router-view></router-view>"},
+			children:[{
+				path:`index`,
+				component:staticChild,
+				props({params:{staticChild}}){
+					return {
+						code:`meta__${staticChild.toLowerCase()}__home`
+					}
+				}
+			}]
+			// children:[{
+			// 	path:'index'
+			// }]
+		}]
 	},
 	{
 		path: '/sortTable',

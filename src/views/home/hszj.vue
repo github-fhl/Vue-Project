@@ -12,6 +12,7 @@
 
 <script>
   export default {
+    props:["name"],
     data() {
       return {
         options: [{
