@@ -25,6 +25,12 @@
     <div>{{ name }}</div>
     <my-component :data="data"></my-component>
     <router-view></router-view>
+    <el-tabs ref="tab" v-model="activeName" @tab-click="handleClick">
+      <el-tab-pane label="用户管理" name="first">用户管理</el-tab-pane>
+      <el-tab-pane label="配置管理" name="second">配置管理</el-tab-pane>
+      <el-tab-pane label="角色管理" name="third">角色管理</el-tab-pane>
+      <el-tab-pane label="定时任务补偿" name="fourth">定时任务补偿</el-tab-pane>
+    </el-tabs>
   </div>
 </template>
 
@@ -42,10 +48,21 @@ export default {
       data: {
         type:"img"
       },
+      activeName:"first"
     };
+  },
+  watch:{
+    activeName(){
+      console.log(1)
+      this.activeName = "first"
+      this.$refs.tab.currentName="first"
+      console.log(this.$refs.tab.currentName)
+    }
+
   },
   components: { childDom, demoA },
   methods: {
+    handleClick(){},
     reciveRocket() {
       console.log("reciveRocket success");
     },

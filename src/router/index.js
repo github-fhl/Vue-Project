@@ -26,7 +26,7 @@ router = new VueRouter({
 		},
 		children:[{
 			path:`:staticChild`,
-			component: {template: "<router-view></router-view>"},
+			component: {template: "<div>222222222<router-view></router-view></div>"},
 			children:[{
 				path:`index`,
 				component:staticChild,
