@@ -12,10 +12,12 @@ export default {
       columns: [
         {
           title: "姓名",
+          sortable:true,
           key: "name",
         },
         {
           title: "年龄",
+          sortable:true,
           key: "age",
         },
       ],
@@ -27,8 +29,14 @@ export default {
           address: "山西省吕梁市离石区118号118弄",
         },
         {
-          name: "王小明",
-          age: 18,
+          name: "王小丽",
+          age: 10,
+          birthday: "19000802",
+          address: "山西省吕梁市离石区118号118弄",
+        },
+        {
+          name: "王小哈",
+          age: 5,
           birthday: "19000802",
           address: "山西省吕梁市离石区118号118弄",
         },
@@ -60,9 +68,13 @@ Vue.component("vTable", {
       currentData: [],
     };
   },
-  mounted() {
+  created(){
     this.makeColumns();
     this.makeData();
+  },
+  mounted() {
+    //this.makeColumns();
+    //this.makeData();
   },
   methods: {
     makeColumns: function () {
@@ -81,15 +93,67 @@ Vue.component("vTable", {
         return item;
       });
     },
+    //升序
+    handleSortByAsc:function(index){
+      var key= this.currentColumns[index].key;
+      this.currentColumns.forEach(function(item,index){
+        item._sortType="normal";
+      })
+      this.currentColumns[index]._sortType="asc";
+      this.currentData.sort(function(a,b){
+        return a[key] < b[key] ? -1:1
+      })
+    },
+    //降序
+    handleSortByDesc:function(index){
+      var key= this.currentColumns[index].key;
+      this.currentColumns.forEach(function(item,index){
+        item._sortType="normal";
+      })
+      this.currentColumns[index]._sortType="desc";
+      this.currentData.sort(function(a,b){
+        return a[key] < b[key] ? 1:-1
+      })
+      console.log(this.currentData);
+    }
+
   },
-  render: (h) => {
+  render: function(h){
     var ths = [];
     var trs = [];
     var self = this;
-    this.currentData.forEach((item, index) => {
+    this.currentColumns.forEach((item, index) => {
+      if(item.sortable){
+        ths.push(h("th",[h('th',[h('span',item.title),h('a',{
+          class:{
+            on:item._sortType === 'asc'
+          },
+          on:{
+            click:function(){
+              self.handleSortByAsc(index)
+            }
+          }
+        },'↑'),
+        //降序
+        h('a',{
+          class:{
+            on:item._sortType === 'desc'
+          },
+          on:{
+            click:function(){
+              self.handleSortByDesc(index)
+            }
+          }
+        },'↓')
+        ])]));
+      }else{
+        ths.push(h("th",item.title))
+      }
+    });
+    this.currentData.forEach((row, index) => {
       var tds = [];
       self.currentColumns.forEach((item, index) => {
-          tds.push(h("td",item[item.key]))
+          tds.push(h("td",row[item.key]))
       });
       trs.push(h("tr",tds));
     });
@@ -97,3 +161,8 @@ Vue.component("vTable", {
   },
 });
 </script>
+<style>
+.on{
+  color: aqua;
+}
+</style>
