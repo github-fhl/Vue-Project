@@ -8,6 +8,7 @@ import tx from '@/views/home/tx'
 import mfSelect from '@/views/home/mfSelect'
 import sortTable from '@/views/VueSzBook/sortTable'
 import staticChild from '@/views/home/staticChild'
+import messageList from '@/views/VueSzBook/messageList/index'
 //mfSelect
 import Vue from "vue";
 
@@ -44,6 +45,10 @@ router = new VueRouter({
 	{
 		path: '/sortTable',
 		component: sortTable
+	},
+	{
+		path: '/messageList',
+		component: messageList
 	},
 	{
 		path: '/mfSelect',
