@@ -15,7 +15,9 @@ export default Vue.component("vTextarea", {
   mounted() {
   },
   methods: {
-
+    focus:function(){
+      this.$refs.messagea.focus()
+    }
   },
   render: function (h) {
     var self = this;
@@ -26,6 +28,7 @@ export default Vue.component("vTextarea", {
           rows: '6',
           cols:'30'
         },
+        ref:'messagea',
         domProps: {
           value: this.value
         },

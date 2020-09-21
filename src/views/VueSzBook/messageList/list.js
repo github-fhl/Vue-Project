@@ -39,7 +39,7 @@ export default Vue.component("vList", {
                 },
                 [
                     h('p',msg.message),
-                    h('a',{
+                    h('button',{
                         attrs:{
                             class:'list-reply'
                         },
