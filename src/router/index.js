@@ -10,6 +10,8 @@ import sortTable from '@/views/VueSzBook/sortTable'
 import staticChild from '@/views/home/staticChild'
 import messageList from '@/views/VueSzBook/messageList/index'
 import shoppingCar from '@/views/VueSzBook/shoppingCar/index'
+//dropdownMenu
+import dropdownMenu from '@/views/VueSzBook/dropdownMenu/index'
 //mfSelect
 import Vue from "vue";
 
@@ -54,6 +56,10 @@ router = new VueRouter({
 	{
 		path: '/shoppingCar',
 		component: shoppingCar
+	},
+	{
+		path: '/dropdownMenu',
+		component: dropdownMenu
 	},
 	{
 		path: '/mfSelect',
