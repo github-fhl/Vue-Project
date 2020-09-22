@@ -12,6 +12,8 @@ import messageList from '@/views/VueSzBook/messageList/index'
 import shoppingCar from '@/views/VueSzBook/shoppingCar/index'
 //dropdownMenu
 import dropdownMenu from '@/views/VueSzBook/dropdownMenu/index'
+//time实时显示时间转换
+import time from '@/views/VueSzBook/directive/time'
 //mfSelect
 import Vue from "vue";
 
@@ -60,6 +62,10 @@ router = new VueRouter({
 	{
 		path: '/dropdownMenu',
 		component: dropdownMenu
+	},
+	{
+		path: '/time',
+		component: time
 	},
 	{
 		path: '/mfSelect',
