@@ -9,6 +9,7 @@ import mfSelect from '@/views/home/mfSelect'
 import sortTable from '@/views/VueSzBook/sortTable'
 import staticChild from '@/views/home/staticChild'
 import messageList from '@/views/VueSzBook/messageList/index'
+import shoppingCar from '@/views/VueSzBook/shoppingCar/index'
 //mfSelect
 import Vue from "vue";
 
@@ -49,6 +50,10 @@ router = new VueRouter({
 	{
 		path: '/messageList',
 		component: messageList
+	},
+	{
+		path: '/shoppingCar',
+		component: shoppingCar
 	},
 	{
 		path: '/mfSelect',
