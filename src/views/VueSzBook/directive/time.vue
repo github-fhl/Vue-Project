@@ -9,6 +9,7 @@
 
 <script>
 import Vue from "vue";
+import {Time} from './timeFun'
 export default {
   data() {
     return {
@@ -18,16 +19,19 @@ export default {
   },
   components: {},
   methods: {
-      handleClose:function(){
-          this.show=false
-      }
   },
   created: function() {}
 };
 Vue.directive('time',{
-    bind:function(el,binding,vnode){
+    bind:function(el,binding){
+      el.innerHTML=Time.getFormatTime(binding.value);
+      el._timeout=setInterval(function(){
+        el.innerHTML=Time.getFormatTime(binding.value);
+      },6000)
     },
     unbind:function(){
+      clearInterval(el._timeout);
+      delete el._timeout
     }
 })
 </script>
