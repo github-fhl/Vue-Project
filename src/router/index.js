@@ -14,6 +14,8 @@ import shoppingCar from '@/views/VueSzBook/shoppingCar/index'
 import dropdownMenu from '@/views/VueSzBook/dropdownMenu/index'
 //time实时显示时间转换
 import time from '@/views/VueSzBook/directive/time'
+//初始化认识自定义指令
+import initDirective from '@/views/VueSzBook/directive/init'
 //mfSelect
 import Vue from "vue";
 
@@ -66,6 +68,11 @@ router = new VueRouter({
 	{
 		path: '/time',
 		component: time
+	},
+	//initDirective
+	{
+		path: '/initDirective',
+		component: initDirective
 	},
 	{
 		path: '/mfSelect',
