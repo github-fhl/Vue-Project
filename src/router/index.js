@@ -16,6 +16,8 @@ import dropdownMenu from '@/views/VueSzBook/dropdownMenu/index'
 import time from '@/views/VueSzBook/directive/time'
 //初始化认识自定义指令
 import initDirective from '@/views/VueSzBook/directive/init'
+//日报组件
+import daily from '@/views/VueSzBook/daily/index'
 //mfSelect
 import Vue from "vue";
 
@@ -73,6 +75,11 @@ router = new VueRouter({
 	{
 		path: '/initDirective',
 		component: initDirective
+	},
+	//daily
+	{
+		path:'/daily',
+		component:daily
 	},
 	{
 		path: '/mfSelect',
