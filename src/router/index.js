@@ -18,6 +18,8 @@ import time from '@/views/VueSzBook/directive/time'
 import initDirective from '@/views/VueSzBook/directive/init'
 //日报组件
 import daily from '@/views/VueSzBook/daily/index'
+//级联组件
+import cascader from '@/views/VueSzBook/cascader/index'
 //mfSelect
 import Vue from "vue";
 
@@ -80,6 +82,11 @@ router = new VueRouter({
 	{
 		path:'/daily',
 		component:daily
+	},
+	//cascader
+	{
+		path:'/cascader',
+		component:cascader
 	},
 	{
 		path: '/mfSelect',

@@ -44,6 +44,7 @@
     "esprima": "^4.0.1",
     "js-cookie": "^2.2.1",
     "jsonpath": "^1.0.2",
+    "v-click-outside-x": "^4.1.0",
     "vue": "^2.2.6",
     "vue-i18n": "^8.18.2",
     "vue-router": "^2.3.1"
