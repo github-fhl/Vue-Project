@@ -23,7 +23,8 @@
     
     <f-input :name="name" @input="(val) => (name = val)"></f-input>
     <div>{{ name }}</div>
-    <my-component :data="data"></my-component>
+    <el-input v-model="name" placeholder="请输入内容333"></el-input>
+    <my-component :data="data" placeholder="请输入内容eee"></my-component>
     <router-view></router-view>
     <el-tabs ref="tab" v-model="activeName" @tab-click="handleClick">
       <el-tab-pane label="用户管理" name="first">用户管理</el-tab-pane>

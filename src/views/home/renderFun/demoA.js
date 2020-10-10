@@ -118,6 +118,9 @@ Vue.component('my-component', {
     props: {
         data: {
             type: Object
+        },
+        placeholder:{
+            type:String
         }
     },
     // 为了弥补缺少的实例
@@ -132,8 +135,8 @@ Vue.component('my-component', {
                 return textItem
             }
         }
-        return <div class={1}>
-                <span>一级</span> 标题
-            </div>
+        console.log(context)
+        context.data.attrs["placeholder"]=context.props['placeholder'];
+        return h("el-input", context.data, context.children);
     }
 })
