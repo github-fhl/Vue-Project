@@ -1,64 +1,68 @@
-<template></template>
+<template>
+    <li :class="classes">
+        {{ data.label }}
+        <Icon :type="arrowType" :custom="customArrowType" :size="arrowSize" v-if="showArrow" />
+        <i v-if="showLoading" class="ivu-icon ivu-icon-ios-loading ivu-load-loop ivu-cascader-menu-item-loading"></i>
+    </li>
+</template>
 <script>
-//data：决定了级联面板的内容。
-//value：当前选择项，可使用v-model。
-//disabled：是否禁用。
-//clearable：是否可清空。
-//placeholder：占位提示。
-//size：尺寸（iView 多数表单类组件都有尺寸）。
-//trigger：触发方式（点击或鼠标滑入）。
-//changeOnSelect：选择即改变。
-//renderFormat：自定义显示内容。
-export default {
-  name: "casitem",
-  props:{
-      data:{
-          type:Array,
-          default(){
-              return [];
-          }
-      },
-      value:{
-          type:Array,
-          default(){
-              return [];
-          }
-      },
-      disabled:{
-          type:Boolean,
-          default:false,
-      },
-      clearable:{
-          type:Boolean,
-          default:true
-      },
-      placeholder:{
-          type:String,
-          default:'请选择'
-      },
-      size:{
-          validator(value){
-              return oneOf(value,['small','large']);
-          }
-      },
-      trigger:{
-          validator(value){
-              return oneOf(value,['click','hover'])
-          },
-          default:'click'
-      },
-      changeOnSelect:{
-          type:Boolean,
-          default:false
-      },
-      renderFormat:{
-          type:Function,
-          default(label){
-              return label.join('/');
-          }
-      }
-  }
-};
+    import Icon from './icon.vue';
+    export default {
+        name: 'casitem',
+        components: { Icon },
+        props: {
+            data: Object,
+            prefixCls: String,
+            tmpItem: Object
+        },
+        computed: {
+            classes () {
+                return [
+                    `${this.prefixCls}-menu-item`,
+                    {
+                        [`${this.prefixCls}-menu-item-active`]: this.tmpItem.value === this.data.value,
+                        [`${this.prefixCls}-menu-item-disabled`]: this.data.disabled
+                    }
+                ];
+            },
+            showArrow () {
+                return (this.data.children && this.data.children.length) || ('loading' in this.data && !this.data.loading);
+            },
+            showLoading () {
+                return 'loading' in this.data && this.data.loading;
+            },
+            // 3.4.0, global setting customArrow 有值时，arrow 赋值空
+            arrowType () {
+                let type = 'ios-arrow-forward';
+                if (this.$IVIEW) {
+                    if (this.$IVIEW.cascader.customItemArrow) {
+                        type = '';
+                    } else if (this.$IVIEW.cascader.itemArrow) {
+                        type = this.$IVIEW.cascader.itemArrow;
+                    }
+                }
+                return type;
+            },
+            // 3.4.0, global setting
+            customArrowType () {
+                let type = '';
+                if (this.$IVIEW) {
+                    if (this.$IVIEW.cascader.customItemArrow) {
+                        type = this.$IVIEW.cascader.customItemArrow;
+                    }
+                }
+                return type;
+            },
+            // 3.4.0, global setting
+            arrowSize () {
+                let size = '';
+                if (this.$IVIEW) {
+                    if (this.$IVIEW.cascader.itemArrowSize) {
+                        size = this.$IVIEW.cascader.itemArrowSize;
+                    }
+                }
+                return size;
+            }
+        }
+    };
 </script>
-<style scoped>
-</style>

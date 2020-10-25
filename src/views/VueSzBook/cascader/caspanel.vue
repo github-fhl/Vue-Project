@@ -1,8 +1,8 @@
 <template>
   <span>
       <ul v-if="data && data.length" :class="[prefixCls+'-menu']">
-          <casitem v-for="item in data"
-          :key="item"
+          <casitem v-for="(item,index) in data"
+          :key="index"
           :prefix-cls="prefixCls"
           :data="item"
           :tmp-item="tmpItem"
@@ -27,6 +27,7 @@ import emitter from './emitter'
 export default {
   name: "caspanel",
   mixins:[emitter],
+  components:{casitem},
   props: {
     data: {
       type: Array,

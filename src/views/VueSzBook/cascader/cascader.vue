@@ -102,7 +102,11 @@ export default {
           default(label){
               return label.join('/');
           }
-      }
+      },
+      filterable: {
+        type: Boolean,
+        default: false
+     },
   },
   data(){
       return {
@@ -146,7 +150,24 @@ export default {
           if (JSON.stringfy(val) !== oldVal) {
               this.$emit('on-change',this.currentValue,JSON.pares(JSON.stringfy(this.selected)))
           }
-      }
+      },
+      handleClose () {
+           this.visible = false;
+      },
+      toggleOpen () {
+        if (this.disabled) return false;
+        if (this.visible) {
+            if (!this.filterable) this.handleClose();
+        } else {
+            this.onFocus();
+        }
+     },
+     onFocus () {
+        this.visible = true;
+        if (!this.currentValue.length) {
+            this.broadcast('Caspanel', 'on-clear');
+        }
+    },
   },
   mounted(){
       //初始化时更新选中数据
