@@ -20,7 +20,7 @@
       <child></child>
       <child></child>
     </elem> -->
-    
+
     <f-input :name="name" @input="(val) => (name = val)"></f-input>
     <div>{{ name }}</div>
     <el-input v-model="name" placeholder="请输入内容333"></el-input>
@@ -32,11 +32,35 @@
       <el-tab-pane label="角色管理" name="third">角色管理</el-tab-pane>
       <el-tab-pane label="定时任务补偿" name="fourth">定时任务补偿</el-tab-pane>
     </el-tabs>
+
+    <el-form
+      :model="ruleForm"
+      :rules="rules"
+      ref="ruleForm"
+      label-width="100px"
+      class="demo-ruleForm"
+    >
+      <el-form-item label="活动名称" prop="name">
+        <el-input v-model="ruleForm.name"></el-input>
+      </el-form-item>
+      <el-form-item label="活动区域" prop="region">
+        <el-select v-model="ruleForm.region" placeholder="请选择活动区域">
+          <el-option label="区域一" value="shanghai"></el-option>
+          <el-option label="区域二" value="beijing"></el-option>
+        </el-select>
+      </el-form-item>
+      <el-form-item>
+        <el-button type="primary" @click="submitForm('ruleForm')"
+          >立即创建</el-button
+        >
+        <el-button @click="resetForm('ruleForm')">重置</el-button>
+      </el-form-item>
+    </el-form>
   </div>
 </template>
 
 <script>
-import Vue from 'vue'
+import Vue from "vue";
 import childDom from "./ChildDom.vue";
 import demoA from "./renderFun/demoA";
 export default {
@@ -47,23 +71,48 @@ export default {
       list: [2, 3, 4],
       name: "",
       data: {
-        type:"img"
+        type: "img",
       },
-      activeName:"first"
+      activeName: "first",
+      ruleForm: {
+        name: "",
+        region: ""
+      },
+      rules: {
+        name: [
+          { required: true, message: "请输入活动名称", trigger: "blur" },
+          { min: 3, max: 5, message: "长度在 3 到 5 个字符", trigger: "blur" },
+        ],
+        region: [
+          { required: true, message: "请选择活动区域", trigger: "change" },
+        ]
+      },
     };
   },
-  watch:{
-    activeName(){
-      console.log(1)
-      this.activeName = "first"
-      this.$refs.tab.currentName="first"
-      console.log(this.$refs.tab.currentName)
-    }
-
+  watch: {
+    activeName() {
+      console.log(1);
+      this.activeName = "first";
+      this.$refs.tab.currentName = "first";
+      console.log(this.$refs.tab.currentName);
+    },
   },
   components: { childDom, demoA },
   methods: {
-    handleClick(){},
+    submitForm(formName) {
+      this.$refs[formName].validate((valid) => {
+        if (valid) {
+          alert("submit!");
+        } else {
+          console.log("error submit!!");
+          return false;
+        }
+      });
+    },
+    resetForm(formName) {
+      this.$refs[formName].resetFields();
+    },
+    handleClick() {},
     reciveRocket() {
       console.log("reciveRocket success");
     },

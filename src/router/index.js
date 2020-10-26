@@ -5,6 +5,8 @@ import List from '@/views/home/list'
 import Hello from '@/views/home/hello'
 import hszj from '@/views/home/hszj'
 import tx from '@/views/home/tx'
+//elementKj
+import elementKj from '@/views/elementKj'
 import mfSelect from '@/views/home/mfSelect'
 import sortTable from '@/views/VueSzBook/sortTable'
 import staticChild from '@/views/home/staticChild'
@@ -52,6 +54,11 @@ router = new VueRouter({
 			// 	path:'index'
 			// }]
 		}]
+	},
+	//elementKj
+	{
+		path: '/element',
+		component: elementKj
 	},
 	{
 		path: '/sortTable',

@@ -32,6 +32,10 @@
 			maxLine: {
 				type: Number,
 				default: 0
+			},
+			ref:{
+				type: String,
+				default: "mFrom"
 			}
 		},
 		data() {
@@ -55,7 +59,7 @@
 				return 0;
 			},
 			form() {
-				return this.$refs.mFrom || {};
+				return this.$refs[this.ref] || {};
 			}
 		},
 		created() {
@@ -102,13 +106,13 @@
 		render(h) {
 			//					validate-on-rule-change={false}
 			return <el-form
-					ref="mFrom"
+					ref={this.ref}
 					rules={this.rules}
 					model={this.model}
 					inline={this.inline}
 					displayOnly={this.displayOnly}
-					validate-on-rule-change={false}
-					size="mini"
+					validate-on-rule-change={true}
+					size="small"
 					class={`span-${this.span || "default"}`}
 					label-position={this.labelPosition}
 					label-width={this.hideLabel ? "" : this.labelWidth}>
