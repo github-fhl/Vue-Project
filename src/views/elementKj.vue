@@ -1,89 +1,73 @@
 <template>
-  <el-container>
-    <el-header>Header</el-header>
-    <el-container>
-      <el-aside width="200px">Aside</el-aside>
-      <el-main>Main</el-main>
-    </el-container>
-
-    <el-row>
-      <div :span="4" style="min-width: 200px; float: right;">
-        <el-input
-          style="width: 180px;"
-          v-model="searchData"
-          placeholder="输入关键字搜索"
-          clearable
-          @keyup.enter.native="getDeptListData"
-          size="small"
-        />
-        <el-button size="small" type="success" @click="getDeptListData">搜索</el-button>
-      </div>
-    </el-row>
-    <el-table
-      ref="singleTable"
-      :data="tableData "
-      highlight-current-row
-      border
-      :default-sort="ds"
-      height="550"
-      :filter-method="filterHandler"
-      @selection-change="handleSelectionChange"
-      v-loading="loading"
-      element-loading-text="数据加载中"
-      element-loading-spinner="el-icon-loading"
-    >
-      <el-table-column type="selection" width="55"></el-table-column>
-      <el-table-column prop="name" label="名称" sortable>
+  <el-main>
+    <el-input v-model="input" placeholder="请输入内容"></el-input>
+    <el-button type="primary" @click="search">搜搜</el-button>
+    <el-table :data="tableData" border style="width: 100%">
+      <el-table-column prop="date" label="日期" width="180"></el-table-column>
+      <el-table-column prop="name" label="姓名" width="180">
         <template slot-scope="scope">
-          <span v-html="showDate(scope.row.name)"></span>
-        </template>
-        <!-- 这一步为关键，将数据用v-html显示方便添加html标签和设置样式-->
-      </el-table-column>
-
-      <el-table-column prop="age" label="年龄" sortable>
-        <template slot-scope="scope">
-          <span v-html="showDate(scope.row.age)"></span>
+          <span v-html="showData(scope.row.name)"></span>
         </template>
       </el-table-column>
+      <el-table-column prop="address" label="地址"></el-table-column>
     </el-table>
-  </el-container>
+  </el-main>
 </template>
+
 <script>
 export default {
-  name: "element",
-  data(){
-    return{
-      searchData:"",
-      tableData:[]
-    }
+  data() {
+    return {
+      input: "",
+      tableData: []
+    };
+  },
+  computed: {
   },
   methods: {
-    getDeptListData() {
-      getDeptList().then(response => {
-        if (_self.searchData != "") {
-          _self.tableData = response.data.filter(
-            item =>
-              item.name.toString().includes(_self.searchData.toString()) ||
-              item.age.toString().includes(_self.searchData.toString())
-          );
-        } else {
-          _self.tableData = response.data;
-        }
-      });
-    },
     // 筛选变色
-    showDate(val) {
+    showData(val) {
+      console.log(val)
       val = val + "";
-      if (val.indexOf(_self.searchData) !== -1 && _self.searchData !== "") {
-        return val.replace(
-          _self.searchData,
-          '<font color="#409EFF">' + _self.searchData + "</font>"
-        );
+      if (this.checkPara(val, this.input)) {
+        //如果搜索结果记录包含关键字中的任何一个，那么修改样式
+        return val.replace(this.input,'<font color="#409EFF">' + this.input + '</font>')
       } else {
-        return val;
+        return val; //不做任何修改
       }
+    },
+    //判断搜索记录是否包含某个关键字
+    checkPara(val, para) {
+      if (val.indexOf(para) !== -1 && para !== "") {
+        return true;
+      } else {
+        return false;
+      }
+    },
+    search() {
+      this.tableData=[
+        {
+          date: "2016-05-02",
+          name: "王小哈",
+          address: "上海市普陀区金沙江路 1518 弄"
+        },
+        {
+          date: "2016-05-04",
+          name: "王小明",
+          address: "上海市普陀区金沙江路 1517 弄"
+        },
+        {
+          date: "2016-05-01",
+          name: "王小虎",
+          address: "上海市普陀区金沙江路 1519 弄"
+        },
+        {
+          date: "2016-05-03",
+          name: "王小虎",
+          address: "上海市普陀区金沙江路 1516 弄"
+        }
+      ]
     }
   }
 };
 </script>
-<style scoped></style>
