@@ -113,19 +113,16 @@ var videoItem = {
 
 Vue.component('my-component', {
     name: "my-component",
-    functional: true,
+    //functional: true,
     // Props 是可选的
     props: {
         data: {
             type: Object
-        },
-        placeholder:{
-            type:String
         }
     },
     // 为了弥补缺少的实例
     // 提供第二个参数作为上下文
-    render: function (h, context) {
+    render: function (h) {
         function getComponent() {
             if (context.props.data.type == "img") {
                 return imgItem
@@ -135,8 +132,59 @@ Vue.component('my-component', {
                 return textItem
             }
         }
-        console.log(context)
-        context.data.attrs["placeholder"]=context.props['placeholder'];
-        return h("el-input", context.data, context.children);
+        return h("el-container", {
+            props: { "direction": "vertical" }
+        }, [h("el-container", {
+            style: {
+                "height": "calc(100vh - 100px)"
+            }
+        }, [
+            h("el-scrollbar",{
+                style:{
+                    "height":"100%",
+                    "width":"100%",
+                }
+            },[
+                h("el-row",{},[h("el-container",{
+                    class:"header-part page-header",
+                    style:{
+                        "align-items":"center"
+                    }
+                },[
+                    h("h2",{
+                        domProps:{innerHTML:"组织"}
+                    })
+                ])]),
+                h("el-card",{
+                    style:{
+                        "margin":"20px 18px",
+                        "flex":"auto",
+                        "display":"flex"
+                    },
+                    props:{
+                        "body-style":{
+                            "flex":"auto",
+                            "padding":"0"
+                        }
+                    }
+                },[
+                    h("el-main",{
+                        style:{
+                            "padding":"20px"
+                        }
+                    },[
+                        h("el-input",{
+                            style:{
+                                "border-radius":"4px 0px 0px 4px"
+                            },
+                            props:{
+                                "placeholder":"请输入名称",
+                                "value":"{searchParams.current.codeName}"
+                            }
+                        },[])
+                    ])
+                ])
+            ])
+        ])]);
     }
 })

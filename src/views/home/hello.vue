@@ -24,7 +24,6 @@
     <f-input :name="name" @input="(val) => (name = val)"></f-input>
     <div>{{ name }}</div>
     <el-input v-model="name" placeholder="请输入内容333"></el-input>
-    <my-component :data="data" placeholder="请输入内容eee"></my-component>
     <router-view></router-view>
     <el-tabs ref="tab" v-model="activeName" @tab-click="handleClick">
       <el-tab-pane label="用户管理" name="first">用户管理</el-tab-pane>
@@ -56,6 +55,8 @@
         <el-button @click="resetForm('ruleForm')">重置</el-button>
       </el-form-item>
     </el-form>
+    <div>========================layout=========================</div>
+    <my-component :data="data" ></my-component>
   </div>
 </template>
 
